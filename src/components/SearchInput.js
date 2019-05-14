@@ -19,24 +19,25 @@ const SearchInput = React.forwardRef(
     },
     ref
   ) => (
-    <StyledInputWrapper ref={ref}>
-      <StyledSearchInput
-        onChange={onChange}
-        showResults={showResults}
-        data-autofocus
-        {...props}
-      />
-      <StyledSearchResultsContainer>
-        <SearchResultsList
+    <StyledFocusLock>
+      <StyledInputWrapper ref={ref}>
+        <StyledSearchInput
+          onChange={onChange}
           showResults={showResults}
-          setResultsVisibility={setResultsVisibility}
-          selectedCategories={selectedCategories}
-          loading={loading}
-          results={searchResults}
-          onSelect={onSelect}
+          {...props}
         />
-      </StyledSearchResultsContainer>
-    </StyledInputWrapper>
+        <StyledSearchResultsContainer>
+          <SearchResultsList
+            showResults={showResults}
+            setResultsVisibility={setResultsVisibility}
+            selectedCategories={selectedCategories}
+            loading={loading}
+            results={searchResults}
+            onSelect={onSelect}
+          />
+        </StyledSearchResultsContainer>
+      </StyledInputWrapper>
+    </StyledFocusLock>
   )
 );
 
@@ -50,7 +51,14 @@ SearchInput.propTypes = {
   loading: PropTypes.bool
 };
 
-export const StyledInputWrapper = styled(FocusLock)`
+export const StyledFocusLock = styled(FocusLock)`
+  display: flex;
+  flex-flow: column nowrap;
+
+  width: 100%;
+`;
+
+export const StyledInputWrapper = styled.div`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

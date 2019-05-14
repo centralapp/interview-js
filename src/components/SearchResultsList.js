@@ -99,8 +99,6 @@ const SearchResultsList = ({
     [searchResults, setResultsVisibility]
   );
 
-  console.log(selected);
-
   return (
     <StyledSearchResultsList show={showResults} onFocusCapture={onResultsFocus}>
       {loading ? (

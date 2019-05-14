@@ -97,6 +97,7 @@ export const StyledSearchResultListItem = styled.div`
   border-bottom: 1px solid #ddd;
   color: rgba(0, 0, 0, 0.87);
   cursor: ${({ href }) => (href ? "pointer" : "default")};
+  outline: none; /* For the demo only, wouldn't do that in real world. */
 
   user-select: none;
   -moz-user-select: none;
