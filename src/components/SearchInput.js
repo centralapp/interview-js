@@ -13,16 +13,22 @@ const SearchInput = React.forwardRef(
       showResults,
       loading,
       setResultsVisibility,
+      selectedCategories,
       ...props
     },
     ref
   ) => (
     <StyledInputWrapper ref={ref}>
-      <StyledSearchInput onChange={onChange} {...props} />
+      <StyledSearchInput
+        onChange={onChange}
+        showResults={showResults}
+        {...props}
+      />
       <StyledSearchResultsContainer>
         <SearchResultsList
           showResults={showResults}
           setResultsVisibility={setResultsVisibility}
+          selectedCategories={selectedCategories}
           loading={loading}
           results={searchResults}
           onSelect={onSelect}
@@ -37,6 +43,7 @@ SearchInput.propTypes = {
   onSelect: PropTypes.func.isRequired,
   setResultsVisibility: PropTypes.func.isRequired,
   searchResults: PropTypes.array.isRequired,
+  selectedCategories: PropTypes.array.isRequired,
   showResults: PropTypes.bool.isRequired,
   loading: PropTypes.bool
 };
@@ -57,20 +64,27 @@ export const StyledSearchInput = styled.input`
   padding: 1.2rem 1.5rem;
 
   background-color: white;
-  border: 1px solid #c1c1c1;
+  border: none;
   border-radius: 6px;
   color: #333b42;
   font-size: 1.45rem;
+  outline: none; /* I know. Bad thing. But for the demo it breaks coolness */
+
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21);
+  border-radius: 6px;
+  border-bottom-left-radius: ${({ showResults }) => (showResults ? 0 : 6)};
+  border-bottom-right-radius: ${({ showResults }) => (showResults ? 0 : 6)};
+  border-bottom: ${({ showResults }) =>
+    showResults ? "1px solid #dddddd" : "none"};
+
   transition: color 250ms cubic-bezier(0.23, 1, 0.32, 1) 0s;
   resize: none;
-
-  &:focus {
-    border-color: blue;
-  }
 `;
 
 export const StyledSearchResultsContainer = styled.div`
+  display: flex;
   width: 100%;
+  height: 100%;
   position: relative;
 `;
 

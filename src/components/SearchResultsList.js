@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import useKey from "use-key-hook";
@@ -10,17 +10,24 @@ const SearchResultsList = ({
   loading,
   onSelect,
   showResults,
-  setResultsVisibility
+  setResultsVisibility,
+  selectedCategories
 }) => {
   const [selected, setSelected] = useState({
     index: -1,
-    id: results && results[0] ? results[0].id : 0
+    id: null
   });
   const searchResults = useRef(results);
   const selectedResult = useRef(selected);
 
   searchResults.current = results;
   selectedResult.current = selected;
+
+  useEffect(() => {
+    if (!showResults) {
+      setSelected({ index: -1, id: null });
+    }
+  }, [showResults, selected]);
 
   useKey(
     (key, event) => {
@@ -107,18 +114,23 @@ const SearchResultsList = ({
           path={"We found nothing matching your query"}
         />
       ) : (
-        results.map((result, index) => (
-          <SearchResultListItem
-            key={result.id}
-            id={result.id}
-            name={result.name}
-            path={result.path}
-            slug={result.slug}
-            onSelect={() => onSelect(result)}
-            selected={selected.id === result.id}
-            autoFocus={selected.id === result.id}
-          />
-        ))
+        results.map((result, index) => {
+          const isItemChecked =
+            selectedCategories &&
+            selectedCategories.find(r => r.id === result.id);
+          return (
+            <SearchResultListItem
+              key={result.id}
+              id={result.id}
+              name={result.name}
+              path={result.path}
+              slug={result.slug}
+              onSelect={() => onSelect(result)}
+              selected={selected.id === result.id}
+              checked={isItemChecked}
+            />
+          );
+        })
       )}
     </StyledSearchResultsList>
   );
@@ -128,7 +140,8 @@ SearchResultsList.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
   onSelect: PropTypes.func.isRequired,
   loading: PropTypes.bool,
-  showResults: PropTypes.bool
+  showResults: PropTypes.bool,
+  selectedCategories: PropTypes.array.isRequired
 };
 
 export const StyledSearchResultsList = styled.div`
@@ -137,14 +150,20 @@ export const StyledSearchResultsList = styled.div`
 
   width: 100%;
   max-height: 300px;
+  height: min-content;
   position: absolute;
 
   pointer-events: ${({ show }) => (show ? "all" : "none")};
   opacity: ${({ show }) => (show ? 1 : 0)};
-  transform: ${({ show }) => (show ? "translateY(0)" : "translateY(-15px)")};
-  transition: opacity 250ms cubic-bezier(0.23, 1, 0.32, 1) 0s,
-    transform 250ms cubic-bezier(0.23, 1, 0.32, 1) 0s;
-  box-shadow: 0 0 0.6rem 0 rgba(0, 0, 0, 0.15);
+  transform: ${({ show }) => (show ? "translateY(0)" : "translateY(-10px)")};
+
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+
+  transition: opacity 140ms cubic-bezier(0.23, 1, 0.32, 1) 0s,
+    transform 140ms cubic-bezier(0.23, 1, 0.32, 1) 0s;
+
   overflow: auto;
 `;
 

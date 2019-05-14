@@ -93,6 +93,7 @@ const CategoriesChooser = () => {
         onChange={onSearchQueryChange}
         onClick={onSearchClick}
         onSelect={onCategoryAdd}
+        selectedCategories={selectedCategories}
         searchResults={searchResults}
         showResults={showResults}
         setResultsVisibility={setShowResults}
