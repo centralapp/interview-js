@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import FocusLock from "react-focus-lock";
 
 import SearchResultsList from "./SearchResultsList";
 
@@ -22,6 +23,7 @@ const SearchInput = React.forwardRef(
       <StyledSearchInput
         onChange={onChange}
         showResults={showResults}
+        data-autofocus
         {...props}
       />
       <StyledSearchResultsContainer>
@@ -48,7 +50,7 @@ SearchInput.propTypes = {
   loading: PropTypes.bool
 };
 
-export const StyledInputWrapper = styled.div`
+export const StyledInputWrapper = styled(FocusLock)`
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
