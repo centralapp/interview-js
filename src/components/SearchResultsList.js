@@ -125,7 +125,7 @@ const SearchResultsList = ({
               slug={result.slug}
               onSelect={() => onSelect(result)}
               selected={selected.id === result.id}
-              checked={isItemChecked}
+              checked={isItemChecked != null}
             />
           );
         })
@@ -136,7 +136,7 @@ const SearchResultsList = ({
 
 SearchResultsList.propTypes = {
   results: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onSelect: PropTypes.func.isRequired,
+  onSelect: PropTypes.func,
   loading: PropTypes.bool,
   showResults: PropTypes.bool,
   selectedCategories: PropTypes.array.isRequired

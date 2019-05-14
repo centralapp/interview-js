@@ -45,10 +45,10 @@ const SearchResultListItem = ({
 );
 
 SearchResultListItem.propTypes = {
-  onSelect: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
-  slug: PropTypes.string.isRequired,
+  slug: PropTypes.string,
+  onSelect: PropTypes.func,
   selected: PropTypes.bool,
   checked: PropTypes.bool,
   mode: PropTypes.oneOf(["add", "delete"])
