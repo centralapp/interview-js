@@ -65,9 +65,9 @@ export const StyledHeader = styled.header`
 export const StyledTitle = styled.h1`
   margin: 0;
 
-  color: rgb(0, 0, 0, 0.67);
+  color: #1b83a4;
   font-family: sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 800;
   line-height: 1.2;
   text-transform: uppercase;
@@ -76,7 +76,7 @@ export const StyledTitle = styled.h1`
 export const StyledCaption = styled.span`
   margin: 0;
 
-  color: rgb(0, 0, 0, 0.47);
+  color: rgba(159, 159, 159, 0.6);
   font-family: sans-serif;
   font-size: 14px;
   font-weight: 800;

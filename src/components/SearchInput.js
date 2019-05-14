@@ -77,7 +77,8 @@ export const StyledSearchInput = styled.input`
   border: none;
   border-radius: 6px;
   color: #333b42;
-  font-size: 1.45rem;
+  font-size: 18px;
+  text-transform: capitalize;
   outline: none; /* I know. Bad thing. But for the demo it breaks coolness */
 
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.21);
