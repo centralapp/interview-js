@@ -5,17 +5,11 @@ import fetch from "cross-fetch";
 import useOnClickOutside from "use-onclickoutside";
 
 import { BASE_URL } from "../config/constants";
+import { canPerformSearch, getSearchQuery } from "../utils";
 
-import SearchInput from "../components/SearchInput";
+import SearchBar from "../components/SearchBar";
 import CategoriesList from "../components/CategoriesList";
-
-const canPerformSearch = query => {
-  return query.length >= 3 && String(query).trim() !== "";
-};
-
-const getSearchQuery = e => {
-  return String(e.target.value);
-};
+import CategoriesChooserWrapper from "../components/styled/CategoriesChooserWrapper";
 
 const CategoriesChooser = () => {
   const [dataLoading, setDataLoading] = useState(false);
@@ -82,13 +76,14 @@ const CategoriesChooser = () => {
       setSelectedCategories([
         ...categories.current.filter(c => c.id !== category.id)
       ]);
+      setShowResults(false);
     },
     [categories]
   );
 
   return (
-    <StyledWrapper>
-      <SearchInput
+    <CategoriesChooserWrapper>
+      <SearchBar
         ref={searchAreaRef}
         onChange={onSearchQueryChange}
         onClick={onSearchClick}
@@ -105,22 +100,8 @@ const CategoriesChooser = () => {
         categories={selectedCategories}
         onDelete={onCategoryDelete}
       />
-    </StyledWrapper>
+    </CategoriesChooserWrapper>
   );
 };
-
-export const StyledWrapper = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-
-  width: 600px;
-  padding: 32px;
-
-  background-color: white;
-  border-radius: 6px;
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.05);
-`;
 
 export default CategoriesChooser;
