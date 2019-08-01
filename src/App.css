@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  background-color: #282c34;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.header {
+  font-size: 4rem;
+  color: white;
+  padding: 2rem;
+}
+
+.raised {
+  cursor: pointer;
+  position: relative;
+  top: 0;
+  transition: top ease 0.5s;
+}
+
+.raised:hover {
+  top: -10px;
+}
