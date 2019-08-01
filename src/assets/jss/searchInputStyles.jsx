@@ -5,13 +5,16 @@ const searchInputStyles = makeStyles({
     padding: "2px 4px",
     display: "flex",
     alignItems: "center",
-    width: "35%",
+    minWidth: "35%",
     borderRadius: 500
   },
   input: {
     marginLeft: 8,
     flex: 1,
-    paddingLeft: 23
+    paddingLeft: 23,
+    overflow: "scroll",
+    minWidth: 50,
+    minHeight: 40
   },
   iconButton: {
     padding: 10

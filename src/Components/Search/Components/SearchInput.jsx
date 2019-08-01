@@ -3,11 +3,13 @@ import { Row } from "reactstrap";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
+import AddIcon from "@material-ui/icons/Add";
 import searchInputStyles from "assets/jss/searchInputStyles";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Preselection from "./PreSelection";
 
 export default function SearchInput({ ...props }) {
-  const { setFilteredCategories, setFocus, keyword } = props;
+  const { setFilteredCategories, setFocus, keyword, preSelection } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const menuRef = useRef(null);
@@ -34,9 +36,20 @@ export default function SearchInput({ ...props }) {
           placeholder="Select Category"
           onChange={handleChange}
           value={keyword}
+          startAdornment={
+            <InputAdornment position="start" onClick={() => alert("fede")}>
+              {preSelection.map(option => {
+                return <Preselection preSelection={option} />;
+              })}
+            </InputAdornment>
+          }
         />
-        <IconButton disabled className={classes.iconButton} aria-label="search">
-          <SearchIcon />
+        <IconButton
+          disabled={preSelection.length == 0 ? true : false}
+          className={classes.iconButton}
+          aria-label="search"
+        >
+          <AddIcon />
         </IconButton>
       </Paper>
     </Fragment>

@@ -3,9 +3,11 @@ import { Row } from "reactstrap";
 import centralApp from "common/centralApp";
 import SearchInput from "./Components/SearchInput";
 import Suggestions from "./Components/Suggestions";
+import PreSelection from "./Components/PreSelection";
 
 function Search() {
   const [categories, setCategories] = useState([]);
+  const [preSelection, setPreSelection] = useState([]);
   const [focus, setFocus] = useState(true);
   const [keyword, setKeyword] = useState("");
 
@@ -18,7 +20,8 @@ function Search() {
   const handleSelection = option => {
     setKeyword("");
     setCategories([]);
-    console.log(`Add ${option} to table`);
+    if (preSelection.length <= 2) setPreSelection([...preSelection, option]);
+    else alert("Please add selected Categories");
   };
 
   return (
@@ -28,6 +31,7 @@ function Search() {
           setFilteredCategories={setFilteredCategories}
           setFocus={setFocus}
           keyword={keyword}
+          preSelection={preSelection}
         />
       </Row>
       <Row md="12" className="justify-content-center">
