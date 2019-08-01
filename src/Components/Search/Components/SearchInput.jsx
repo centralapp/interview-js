@@ -1,83 +1,44 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState, useEffect } from "react";
+import { Row } from "reactstrap";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Add";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import SearchIcon from "@material-ui/icons/Search";
 import searchInputStyles from "assets/jss/searchInputStyles";
 
-const options = [
-  "None",
-  "Atria",
-  "Callisto",
-  "Dione",
-  "Ganymede",
-  "Hangouts Call",
-  "Luna",
-  "Oberon",
-  "Phobos",
-  "Pyxis",
-  "Sedna",
-  "Titania",
-  "Triton",
-  "Umbriel"
-];
+export default function SearchInput({ ...props }) {
+  const { setFilteredCategories, setFocus, keyword } = props;
 
-const ITEM_HEIGHT = 48;
-
-export default function SearchInput() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const menuRef = useRef();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const menuRef = useRef(null);
   const open = Boolean(anchorEl);
 
-  function handleClick(event) {
-    setAnchorEl(menuRef.current);
-  }
+  useEffect(() => {
+    menuRef.current.focus();
+  }, []);
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
+  const handleChange = e => {
+    setFilteredCategories(e.target.value);
+  };
 
   const classes = searchInputStyles();
+
   return (
     <Fragment>
       <Paper className={classes.root}>
         <InputBase
-          ref={menuRef}
+          onBlur={() => setFocus(false)}
+          onFocus={() => setFocus(true)}
+          inputRef={menuRef}
           className={classes.input}
-          placeholder="Type a Category"
+          placeholder="Select Category"
+          onChange={handleChange}
+          value={keyword}
         />
-        <IconButton className={classes.iconButton} aria-label="search">
-          <SearchIcon onClick={handleClick} />
+        <IconButton disabled className={classes.iconButton} aria-label="search">
+          <SearchIcon />
         </IconButton>
       </Paper>
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        // anchorReference="none"
-        keepMounted
-        open={open}
-        onClose={handleClose}
-        transformOrigin={{ vertical: "top", horizontal: "left" }}
-        PaperProps={{
-          style: {
-            marginTop: ITEM_HEIGHT * 2.9,
-            maxHeight: ITEM_HEIGHT * 4.5,
-            width: "34%"
-          }
-        }}
-      >
-        {options.map(option => (
-          <MenuItem
-            key={option}
-            selected={option === "Pyxis"}
-            onClick={handleClose}
-          >
-            {option}
-          </MenuItem>
-        ))}
-      </Menu>
     </Fragment>
   );
 }

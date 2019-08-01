@@ -1,0 +1,9 @@
+.suggestion {
+  background-color: transparent;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.suggestion:hover {
+  background-color: steelblue;
+}
