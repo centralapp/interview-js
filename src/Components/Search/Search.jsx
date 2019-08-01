@@ -20,7 +20,10 @@ function Search() {
   const handleSelection = option => {
     setKeyword("");
     setCategories([]);
-    if (preSelection.length <= 2) setPreSelection([...preSelection, option]);
+    if (preSelection.length <= 2)
+      if (preSelection.indexOf(option) == -1)
+        setPreSelection([...preSelection, option]);
+      else alert("Category already selected");
     else alert("Please add selected Categories");
   };
 
@@ -32,6 +35,7 @@ function Search() {
           setFocus={setFocus}
           keyword={keyword}
           preSelection={preSelection}
+          setPreSelection={setPreSelection}
         />
       </Row>
       <Row md="12" className="justify-content-center">

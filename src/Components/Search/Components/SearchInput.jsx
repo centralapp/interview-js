@@ -9,7 +9,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Preselection from "./PreSelection";
 
 export default function SearchInput({ ...props }) {
-  const { setFilteredCategories, setFocus, keyword, preSelection } = props;
+  const {
+    setFilteredCategories,
+    setFocus,
+    keyword,
+    preSelection,
+    setPreSelection
+  } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const menuRef = useRef(null);
@@ -21,6 +27,13 @@ export default function SearchInput({ ...props }) {
 
   const handleChange = e => {
     setFilteredCategories(e.target.value);
+  };
+
+  const removeSelection = option => {
+    let cutSelection = preSelection.filter(x => {
+      return x != option;
+    });
+    setPreSelection([...cutSelection]);
   };
 
   const classes = searchInputStyles();
@@ -37,9 +50,14 @@ export default function SearchInput({ ...props }) {
           onChange={handleChange}
           value={keyword}
           startAdornment={
-            <InputAdornment position="start" onClick={() => alert("fede")}>
+            <InputAdornment position="start">
               {preSelection.map(option => {
-                return <Preselection preSelection={option} />;
+                return (
+                  <Preselection
+                    preSelection={option}
+                    removeSelection={removeSelection}
+                  />
+                );
               })}
             </InputAdornment>
           }

@@ -3,12 +3,15 @@ import { Row } from "reactstrap";
 import style from "./styles.module.css";
 
 function PreSelection({ ...props }) {
-  const { preSelection } = props;
+  const { preSelection, removeSelection } = props;
   return (
     <div className={style.selection}>
       <div style={{ whiteSpace: "nowrap" }}>
         {preSelection}
-        <span className={style.rmSelection} onClick={() => alert("remove")}>
+        <span
+          className={style.rmSelection}
+          onClick={() => removeSelection(preSelection)}
+        >
           x
         </span>
       </div>
