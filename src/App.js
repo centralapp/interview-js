@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useState, useEffect, Fragment } from "react";
+import { Container } from "reactstrap";
 import isEmpty from "./common/is-empty";
 import "./App.css";
 
@@ -9,13 +10,10 @@ import Search from "./Components/Search/Search";
 
 function App() {
   return (
-    <Fragment>
+    <Container style={{ height: "100vh" }}>
       <Header />
       <Search />
-      {/* <div className="App" onClick={() => setFilteredCategories("bar")}>
-        Fede
-      </div> */}
-    </Fragment>
+    </Container>
   );
 }
 

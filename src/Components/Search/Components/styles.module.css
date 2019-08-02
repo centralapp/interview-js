@@ -29,3 +29,12 @@
   font-weight: bold;
   color: #fc5226;
 }
+
+.alert {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  margin-inline-start: auto;
+}

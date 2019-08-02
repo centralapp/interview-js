@@ -12,7 +12,8 @@ const searchInputStyles = makeStyles({
     marginLeft: 8,
     flex: 1,
     paddingLeft: 23,
-    overflow: "scroll",
+    overflowX: "auto",
+    overflowY: "auto",
     minWidth: 50,
     minHeight: 40
   },

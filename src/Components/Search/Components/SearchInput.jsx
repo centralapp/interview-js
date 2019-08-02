@@ -14,7 +14,8 @@ export default function SearchInput({ ...props }) {
     setFocus,
     keyword,
     preSelection,
-    setPreSelection
+    setPreSelection,
+    handleAdd
   } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -67,7 +68,7 @@ export default function SearchInput({ ...props }) {
           className={classes.iconButton}
           aria-label="search"
         >
-          <AddIcon />
+          <AddIcon onClick={handleAdd} />
         </IconButton>
       </Paper>
     </Fragment>
