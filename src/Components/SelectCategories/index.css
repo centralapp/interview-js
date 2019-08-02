@@ -1,0 +1,14 @@
+.valid::after{
+    content: '✓';
+    padding-left: 5px;
+    position: absolute;
+}
+
+.invalid::after{
+    content: 'The category is already selected or doesn\'t exist';
+    font-size: 10px;
+    color: red;
+    padding-left: 5px;
+    position: absolute;
+}
+
