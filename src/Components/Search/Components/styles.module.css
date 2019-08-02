@@ -1,0 +1,40 @@
+.suggestion {
+  background-color: transparent;
+  width: 100%;
+  cursor: pointer;
+  padding: 1rem;
+  padding-left: 2rem;
+  border-bottom: solid lightgrey 1px;
+}
+
+.suggestion:hover {
+  background-color: steelblue;
+}
+
+.selection {
+  background-color: steelblue;
+  padding: 5px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 100px;
+  margin-right: 5px;
+  color: white;
+  word-wrap: break-word;
+}
+
+.rmSelection {
+  font-size: 1.3rem;
+  padding-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #fc5226;
+}
+
+.alert {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  margin-inline-start: auto;
+}
