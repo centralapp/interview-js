@@ -37,7 +37,8 @@ class Categories extends React.Component{
           .then(data => {
               this.setState({ fetchData: data })
           });
-        selectedCategories.push(formInput);
+        const category = categories.filter(elem => elem.name == formInput)
+        selectedCategories.push(category[0]);
         const newArr = categories.filter((elem, index) => elem.name !== formInput )
         this.setState({
             categories: newArr,
@@ -47,16 +48,9 @@ class Categories extends React.Component{
 
     handleDelete = (category) => {
         const { selectedCategories, categories } = this.state;
-        const newArr = selectedCategories.filter((elem, index) => elem !== category);
+        const newArr = selectedCategories.filter((elem, index) => elem.name !== category.name);
         this.setState({ selectedCategories: newArr})
-        const newList = categories.map((elem, index) => {
-            if (elem.name == category){
-                elem.disabled = ""
-                return elem
-            } 
-            return elem
-        })
-        this.setState({categories: newList})
+        categories.push(category)
     }
 
     render(){
@@ -66,8 +60,8 @@ class Categories extends React.Component{
         ))
         const selected = selectedCategories.map((elem, index) => (
             <tr>
-                <td>{elem}</td>
-                <td></td>
+                <td>{elem.name}</td>
+                <td>{elem.path}</td>
                 <td><button onClick={() => this.handleDelete(elem)}>X</button></td>
             </tr>
         ))
