@@ -10,17 +10,14 @@ class Categories extends React.Component{
                 {
                     name: 'restaurant',
                     path: 'Restaurant/',
-                    disabled: ''
                 },
                 {
                     name: 'bar',
                     path: 'Beauty & Wellness',
-                    disabled: ''
                 },
                 {
                     name: 'cafe',
                     path: 'Professionals & Services',
-                    disabled: '',
                 },
                 ],
             fetchData: [],
@@ -29,30 +26,26 @@ class Categories extends React.Component{
     }
 
     eventHandler = (event) => {
-        this.setState({category: event.target.value})
+        this.setState({formInput: event.target.value})
     };
 
     handleSubmit = (event) => {
         event.preventDefault()
-        const { formInput, categories, selectedCategories } = this.state;
-        const name = formInput;
-        fetch(`https://api.centralapp.com/api/v1/categories/like?search=${name}`)
+        const { formInput, selectedCategories, categories } = this.state;
+        fetch(`https://api.centralapp.com/api/v1/categories/like?search=${formInput}`)
           .then(response => response.json())
           .then(data => {
               this.setState({ fetchData: data })
           });
-        selectedCategories.push(name);
-        const newArr = categories.map((elem, index) => {
-            if (elem.name == name){
-                elem.disabled = "disabled"
-                return elem
-            } 
-            return elem
+        selectedCategories.push(formInput);
+        const newArr = categories.filter((elem, index) => elem.name !== formInput )
+        this.setState({
+            categories: newArr,
+            formInput: ''
         })
-        this.setState({categories: newArr})
     }
 
-    handleClick = (category) => {
+    handleDelete = (category) => {
         const { selectedCategories, categories } = this.state;
         const newArr = selectedCategories.filter((elem, index) => elem !== category);
         this.setState({ selectedCategories: newArr})
@@ -69,20 +62,20 @@ class Categories extends React.Component{
     render(){
         const { categories, selectedCategories } = this.state;
         const list = categories.map((elem, index) => (
-            <option key={index.toString} value={elem.name} disabled={elem.disabled}>{elem.name}</option>
+            <option key={index.toString} value={elem.name}>{elem.name}</option>
         ))
         const selected = selectedCategories.map((elem, index) => (
             <tr>
                 <td>{elem}</td>
                 <td></td>
-                <td><button onClick={() => this.handleClick(elem)}>X</button></td>
+                <td><button onClick={() => this.handleDelete(elem)}>X</button></td>
             </tr>
         ))
         return(
             <React.Fragment>
                 <form onSubmit={this.handleSubmit}>
                     <label for="category-search">Search a category: </label>
-                    <input list="categories" name="categories" value={this.state.name} onChange={this.eventHandler}/>
+                    <input list="categories" name="categories" value={this.state.formInput} onChange={this.eventHandler}/>
                     <datalist id="categories">
                         {list}
                     </datalist>
