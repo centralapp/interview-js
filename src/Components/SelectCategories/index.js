@@ -40,7 +40,6 @@ class Categories extends React.Component{
                 bool = false
             };
         } 
-        console.log('exist' + bool)
         return bool
     }
     //input search avoid category resubmission
@@ -54,7 +53,6 @@ class Categories extends React.Component{
                 bool = true
             };
         } 
-        console.log('selected' + bool)
         return bool
     }
     
@@ -120,6 +118,7 @@ class Categories extends React.Component{
                 <span className={inputValidity}></span>
                 }
                 </form>
+                { selectedCategories.length > 0 &&
                 <table>
                     <tr>
                         <th>Category</th>
@@ -128,6 +127,7 @@ class Categories extends React.Component{
                     </tr>
                     {selected}
                 </table>
+                }
             </React.Fragment>
         )
     }
