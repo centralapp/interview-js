@@ -8,9 +8,9 @@ import PreSelection from "./Components/PreSelection";
 import style from "./Components/styles.module.css";
 import isEmpty from "../../common/is-empty";
 
-function Search() {
+function Search({ ...props }) {
+  const { list, setList } = props;
   const [categories, setCategories] = useState([]);
-  const [list, setList] = useState([]);
   const [preSelection, setPreSelection] = useState([]);
   const [focus, setFocus] = useState(true);
   const [keyword, setKeyword] = useState("");

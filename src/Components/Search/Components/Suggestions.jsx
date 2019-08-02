@@ -11,7 +11,10 @@ import style from "./styles.module.css";
 const useStyles = makeStyles(theme => ({
   collapse: {
     width: "100%",
-    margin: "auto"
+    margin: "auto",
+    position: "absolute",
+    left: 0,
+    zIndex: 10
   },
   paper: {
     width: "35%",
