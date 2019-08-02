@@ -27,9 +27,9 @@ class Categories extends React.Component{
     }
 
     eventHandler = (event) => {
-        this.setState({formInput: event.target.value})
+        this.setState({formInput: event.target.value.toLowerCase()})
     };
-
+    //input search avoid wrong category
     categoryExist = () => {
         const { formInput, categories } = this.state;
         let bool;
@@ -43,7 +43,7 @@ class Categories extends React.Component{
         console.log('exist' + bool)
         return bool
     }
-
+    //input search avoid category resubmission
     categoryNotSelected = () => {
         const { formInput, selectedCategories } = this.state;
         let bool;
@@ -57,17 +57,20 @@ class Categories extends React.Component{
         console.log('selected' + bool)
         return bool
     }
-
+    
     handleSubmit = (event) => {
         event.preventDefault()
         const { formInput, selectedCategories, categories, inputValidity } = this.state;
+        //input validation + fetch
         if (this.categoryExist() && (this.categoryNotSelected() || selectedCategories.length == 0)){
             fetch(`https://api.centralapp.com/api/v1/categories/like?search=${formInput}`)
             .then(response => response.json())
             .then(data => {
                 this.setState({ fetchData: data })
             });
+            //remove category from search
             const category = categories.filter(elem => elem.name == formInput)
+            //add category to the list + validation message
             selectedCategories.push(category[0]);
             const newArr = categories.filter((elem, index) => elem.name !== formInput )
             this.setState({
@@ -81,10 +84,11 @@ class Categories extends React.Component{
             })
         }
     }
-
+    //delete category from list
     handleDelete = (category) => {
         const { selectedCategories, categories } = this.state;
         const newArr = selectedCategories.filter((elem, index) => elem.name !== category.name);
+        // adding category back to search input datalist
         this.setState({ selectedCategories: newArr})
         categories.push(category)
     }
@@ -105,25 +109,25 @@ class Categories extends React.Component{
             <React.Fragment>
                 <form onSubmit={this.handleSubmit}>
                     <label for="category-search">Search a category: </label>
-                    <input list="categories" name="categories" value={formInput} onChange={this.eventHandler} autoComplete="off"/>
+                    <input list="categories" className="categories" value={formInput} onChange={this.eventHandler} autoComplete="off"/>
                     {formInput.length > 2 &&
-                    <datalist id="categories">
+                    <datalist id="categories" className="categories-item">
                         {list}
                     </datalist>
                     }
-                <input type="submit" value="Search" />
+                <input type="submit" className="submit" value="Search" />
                 { inputValidity.length > 0 &&
                 <span className={inputValidity}></span>
                 }
                 </form>
-                <tr>
-                    <th>Category</th>
-                    <th>Path</th>
-                    <th>Delete</th>
-                </tr>
-                <tbody>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Path</th>
+                        <th></th>
+                    </tr>
                     {selected}
-                </tbody>
+                </table>
             </React.Fragment>
         )
     }
