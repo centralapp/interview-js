@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper: {
     width: "35%",
+    minWidth: "300px",
     overflow: "scroll",
     overflowX: "hidden",
     maxHeight: "300px",

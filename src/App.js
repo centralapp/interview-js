@@ -7,10 +7,12 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import Search from "./Components/Search/Search";
 import Categories from "./Components/Catgeories/Categories";
+import AlertError from "./common/ErrorSnack/AlertError";
 
 function App() {
   const [list, setList] = useState([]);
   const [shadow, setShadow] = useState(false);
+  const [alertError, setAlertError] = useState(null);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -22,10 +24,10 @@ function App() {
     else setShadow(false);
   };
 
-  function getBodyScrollTop() {
-    const el = document.scrollingElement || document.documentElement;
-    return el.scrollTop;
-  }
+  const getBodyScrollTop = () => {
+    const e = document.scrollingElement || document.documentElement;
+    return e.scrollTop;
+  };
 
   return (
     <Container className="App">
@@ -35,11 +37,16 @@ function App() {
             <Header />
           </Col>
           <Col md="12">
-            <Search list={list} setList={setList} />
+            <Search
+              list={list}
+              setList={setList}
+              setAlertError={setAlertError}
+            />
           </Col>
         </Row>
       </div>
       <Categories list={list} setList={setList} />
+      <AlertError alertError={alertError} setAlertError={setAlertError} />
     </Container>
   );
 }

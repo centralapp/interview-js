@@ -28,15 +28,15 @@ function Categories({ ...props }) {
     >
       {option => props => (
         <Row className="justify-content-center">
-          <div className="raised" style={props}>
-            <div style={c1Style}>
+          <Col md="12" className="raised" style={props}>
+            <Col md="12" style={c1Style}>
               <Row>
-                <Col md="9">
+                <Col md="9" xs="8">
                   <h2>{option.name}</h2>
                   <b>Path: </b>
                   <i>{option.path}</i>
                 </Col>
-                <Col md="3" className="m-auto text-center">
+                <Col md="3" xs="4" className="m-auto text-center">
                   <Tooltip title="Delete" placement="right">
                     <IconButton
                       aria-label="search"
@@ -47,8 +47,8 @@ function Categories({ ...props }) {
                   </Tooltip>
                 </Col>
               </Row>
-            </div>
-          </div>
+            </Col>
+          </Col>
         </Row>
       )}
     </Transition>
@@ -60,6 +60,8 @@ const c1Style = {
   color: "white",
   padding: "1rem",
   margin: "0.5rem",
+  marginLeft: 0,
+  marginRight: 0,
   border: "1px solid transparent",
   borderRadius: "10px"
 };

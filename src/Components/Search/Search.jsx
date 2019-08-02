@@ -1,19 +1,15 @@
 import React, { Fragment, useState } from "react";
-import { Row, Alert } from "reactstrap";
+import { Row } from "reactstrap";
 import centralApp from "common/centralApp";
 import SearchInput from "./Components/SearchInput";
 import Suggestions from "./Components/Suggestions";
 
-import style from "./Components/styles.module.css";
-import isEmpty from "../../common/is-empty";
-
 function Search({ ...props }) {
-  const { list, setList } = props;
+  const { list, setList, setAlertError } = props;
   const [categories, setCategories] = useState([]);
   const [preSelection, setPreSelection] = useState([]);
   const [focus, setFocus] = useState(true);
   const [keyword, setKeyword] = useState("");
-  const [alertError, setAlertError] = useState(null);
 
   const setFilteredCategories = async keyword => {
     let categories = await centralApp.getCategories(keyword);
@@ -71,15 +67,6 @@ function Search({ ...props }) {
           focus={focus}
           handleSelection={handleSelection}
         />
-      </Row>
-      <Row className={style.alert}>
-        <Alert
-          color="danger"
-          isOpen={!isEmpty(alertError)}
-          toggle={() => setAlertError("")}
-        >
-          {alertError}
-        </Alert>
       </Row>
     </Fragment>
   );

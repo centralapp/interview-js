@@ -29,7 +29,6 @@ h1 {
   position: relative;
   top: 0;
   transition: top ease 0.5s;
-  width: 50%;
 }
 .raised:hover {
   top: -10px;
@@ -82,4 +81,65 @@ h1 {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+}
+
+/* Media Q */
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape) Ipad Pro type
+  ##Screen = B/w 1025 to 1367px
+*/
+@media (min-width: 901px) and (max-width: 1367px) and (orientation: landscape) {
+  .wrapper {
+    height: 45%;
+  }
+  .fixed {
+    height: 40%;
+  }
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 900px) and (orientation: landscape) {
+  .wrapper {
+    height: 75%;
+  }
+  .fixed {
+    height: 70%;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .header {
+    font-size: 3.5rem;
+  }
+  .wrapper {
+    height: 30%;
+  }
+  .fixed {
+    height: 25%;
+  }
 }
