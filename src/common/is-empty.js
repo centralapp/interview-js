@@ -1,3 +1,4 @@
+//Helper function to check if something is empty
 const isEmpty = value =>
   value === undefined ||
   value === null ||

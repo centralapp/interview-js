@@ -19,6 +19,7 @@ export default function SearchInput({ ...props }) {
 
   const menuRef = useRef(null);
 
+  //Start focusing the text input
   useEffect(() => {
     menuRef.current.focus();
   }, []);
@@ -27,6 +28,7 @@ export default function SearchInput({ ...props }) {
     setFilteredCategories(e.target.value);
   };
 
+  //Remove the preselection by clicking the "x"
   const removeSelection = option => {
     let cutSelection = preSelection.filter(x => {
       return x.name !== option.name;

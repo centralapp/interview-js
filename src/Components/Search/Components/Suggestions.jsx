@@ -7,6 +7,7 @@ import Collapse from "@material-ui/core/Collapse";
 import isEmpty from "common/is-empty";
 import style from "./styles.module.css";
 
+//Styles by default from Material UI.
 const useStyles = makeStyles(theme => ({
   collapse: {
     width: "100%",
@@ -31,7 +32,9 @@ export default function Suggestions({ ...props }) {
   const classes = useStyles();
   const [checked, setChecked] = useState(false);
 
+  //On keyword, focus, or option changed, display available options.
   useEffect(() => {
+    //Instrucction specified keyword has to be more or equal 3
     if (keyword.length >= 3 && !isEmpty(options) && focus) {
       setChecked(true);
     } else setChecked(false);

@@ -1,7 +1,9 @@
+//Preselections are shown inside the text input field.
+//One step before adding them to the List
 import React from "react";
 import style from "./styles.module.css";
 
-function PreSelection({ ...props }) {
+const PreSelection = ({ ...props }) => {
   const { preSelection, removeSelection } = props;
   return (
     <div className={style.selection}>
@@ -16,6 +18,6 @@ function PreSelection({ ...props }) {
       </div>
     </div>
   );
-}
+};
 
 export default PreSelection;

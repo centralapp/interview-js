@@ -6,9 +6,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import IconButton from "@material-ui/core/IconButton";
 import Delete from "@material-ui/icons/Delete";
 
-function Categories({ ...props }) {
+const Categories = ({ ...props }) => {
   const { list, setList } = props;
 
+  //Delete category from the list
   const deleteCategory = option => {
     if (list.find(category => category.name === option.name)) {
       let newList = list.filter(x => {
@@ -53,7 +54,7 @@ function Categories({ ...props }) {
       )}
     </Transition>
   );
-}
+};
 
 const c1Style = {
   background: "steelblue",

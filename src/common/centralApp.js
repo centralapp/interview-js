@@ -1,5 +1,5 @@
 import { fetch } from "whatwg-fetch";
-
+//Only function used to fetch data from centralApp API
 const centralapp = {
   getCategories: keyword => {
     if (keyword.length >= 3) {

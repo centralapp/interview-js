@@ -9,13 +9,13 @@ import Search from "./Components/Search/Search";
 import Categories from "./Components/Catgeories/Categories";
 import AlertError from "./common/ErrorSnack/AlertError";
 
-function App() {
-  const [list, setList] = useState([]);
-  const [shadow, setShadow] = useState(false);
-  const [alertError, setAlertError] = useState(null);
+const App = () => {
+  const [list, setList] = useState([]); //Values of the Categories to be shown
+  const [shadow, setShadow] = useState(false); //Shadow generated if scrolling down
+  const [alertError, setAlertError] = useState(null); //Alert error triggered if Same Category selected
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll); //event listener to check scroll height
     //eslint-disable-next-line
   }, []);
 
@@ -49,6 +49,6 @@ function App() {
       <AlertError alertError={alertError} setAlertError={setAlertError} />
     </Container>
   );
-}
+};
 
 export default App;

@@ -6,10 +6,10 @@ import Suggestions from "./Components/Suggestions";
 
 function Search({ ...props }) {
   const { list, setList, setAlertError } = props;
-  const [categories, setCategories] = useState([]);
-  const [preSelection, setPreSelection] = useState([]);
-  const [focus, setFocus] = useState(true);
-  const [keyword, setKeyword] = useState("");
+  const [categories, setCategories] = useState([]); //Categories taken from the API request
+  const [preSelection, setPreSelection] = useState([]); //selection before add to the list. Shown inside the input
+  const [focus, setFocus] = useState(true); //Check focus of the input to control collapsible suggestions
+  const [keyword, setKeyword] = useState(""); //Typed letters
 
   const setFilteredCategories = async keyword => {
     let categories = await centralApp.getCategories(keyword);
@@ -29,7 +29,6 @@ function Search({ ...props }) {
 
   const handleAdd = () => {
     //Check if options already added
-
     preSelection.find(option => {
       if (list.find(category => category.name === option.name)) {
         setAlertError(
