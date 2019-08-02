@@ -1,5 +1,4 @@
-import React, { Fragment, useRef, useState, useEffect } from "react";
-import { Row } from "reactstrap";
+import React, { Fragment, useRef, useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,9 +17,7 @@ export default function SearchInput({ ...props }) {
     handleAdd
   } = props;
 
-  const [anchorEl, setAnchorEl] = useState(null);
   const menuRef = useRef(null);
-  const open = Boolean(anchorEl);
 
   useEffect(() => {
     menuRef.current.focus();
@@ -32,7 +29,7 @@ export default function SearchInput({ ...props }) {
 
   const removeSelection = option => {
     let cutSelection = preSelection.filter(x => {
-      return x != option;
+      return x.name !== option.name;
     });
     setPreSelection([...cutSelection]);
   };
@@ -55,6 +52,7 @@ export default function SearchInput({ ...props }) {
               {preSelection.map(option => {
                 return (
                   <Preselection
+                    key={option.name}
                     preSelection={option}
                     removeSelection={removeSelection}
                   />
@@ -64,11 +62,12 @@ export default function SearchInput({ ...props }) {
           }
         />
         <IconButton
-          disabled={preSelection.length == 0 ? true : false}
+          disabled={preSelection.length === 0 ? true : false}
           className={classes.iconButton}
           aria-label="search"
+          onClick={handleAdd}
         >
-          <AddIcon onClick={handleAdd} />
+          <AddIcon />
         </IconButton>
       </Paper>
     </Fragment>

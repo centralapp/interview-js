@@ -10,9 +10,9 @@ function Categories({ ...props }) {
   const { list, setList } = props;
 
   const deleteCategory = option => {
-    if (list.indexOf(option) != -1) {
+    if (list.find(category => category.name === option.name)) {
       let newList = list.filter(x => {
-        return x != option;
+        return x !== option;
       });
       setList([...newList]);
     }
@@ -21,7 +21,7 @@ function Categories({ ...props }) {
   return (
     <Transition
       items={list}
-      keys={option => option}
+      keys={option => option.name}
       from={{ opacity: 0, marginTop: "-500px" }}
       enter={{ opacity: 1, marginTop: "5px" }}
       leave={{ opacity: 0 }}
@@ -32,12 +32,17 @@ function Categories({ ...props }) {
             <div style={c1Style}>
               <Row>
                 <Col md="9">
-                  <h2>{option}</h2>
+                  <h2>{option.name}</h2>
+                  <b>Path: </b>
+                  <i>{option.path}</i>
                 </Col>
                 <Col md="3" className="m-auto text-center">
                   <Tooltip title="Delete" placement="right">
-                    <IconButton aria-label="search">
-                      <Delete onClick={() => deleteCategory(option)} />
+                    <IconButton
+                      aria-label="search"
+                      onClick={() => deleteCategory(option)}
+                    >
+                      <Delete />
                     </IconButton>
                   </Tooltip>
                 </Col>

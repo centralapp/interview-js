@@ -21,17 +21,6 @@ h1 {
   padding: 2rem;
 }
 
-.raised {
-  cursor: pointer;
-  position: relative;
-  top: 0;
-  transition: top ease 0.5s;
-}
-
-.raised:hover {
-  top: -10px;
-}
-
 .App {
   height: 100vh;
 }

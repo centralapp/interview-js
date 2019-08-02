@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "reactstrap";
-import isEmpty from "./common/is-empty";
 import "./App.css";
 
 //Main Components
@@ -15,6 +14,7 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    //eslint-disable-next-line
   }, []);
 
   const handleScroll = () => {

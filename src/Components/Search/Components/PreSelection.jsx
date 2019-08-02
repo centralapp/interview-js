@@ -1,5 +1,4 @@
 import React from "react";
-import { Row } from "reactstrap";
 import style from "./styles.module.css";
 
 function PreSelection({ ...props }) {
@@ -7,7 +6,7 @@ function PreSelection({ ...props }) {
   return (
     <div className={style.selection}>
       <div style={{ whiteSpace: "nowrap" }}>
-        {preSelection}
+        {preSelection.name}
         <span
           className={style.rmSelection}
           onClick={() => removeSelection(preSelection)}

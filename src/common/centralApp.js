@@ -12,7 +12,7 @@ const centralapp = {
           .then(data => {
             resolve(
               data.map(category => {
-                return category.name;
+                return { name: category.name, path: category.path };
               })
             );
           })

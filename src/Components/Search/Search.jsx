@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
-import { Row, Container, Alert, Col } from "reactstrap";
+import { Row, Alert } from "reactstrap";
 import centralApp from "common/centralApp";
 import SearchInput from "./Components/SearchInput";
 import Suggestions from "./Components/Suggestions";
-import PreSelection from "./Components/PreSelection";
 
 import style from "./Components/styles.module.css";
 import isEmpty from "../../common/is-empty";
@@ -17,8 +16,8 @@ function Search({ ...props }) {
   const [alertError, setAlertError] = useState(null);
 
   const setFilteredCategories = async keyword => {
-    let names = await centralApp.getCategories(keyword);
-    if (names) setCategories([...names]);
+    let categories = await centralApp.getCategories(keyword);
+    if (categories) setCategories([...categories]);
     setKeyword(keyword);
   };
 
@@ -26,7 +25,7 @@ function Search({ ...props }) {
     setKeyword("");
     setCategories([]);
     if (preSelection.length <= 2)
-      if (preSelection.indexOf(option) == -1)
+      if (!preSelection.find(x => x.name === option.name))
         setPreSelection([...preSelection, option]);
       else setAlertError("Category already selected");
     else setAlertError("Please add selected Categories");
@@ -34,23 +33,22 @@ function Search({ ...props }) {
 
   const handleAdd = () => {
     //Check if options already added
-    if (
-      preSelection.some(option => {
-        if (list.indexOf(option) != -1) {
-          setAlertError(
-            `Category name '${option}' already added. Please Change your selection.`
-          );
-          return -1;
-        }
-      })
-    )
-      return false;
-    else {
-      setList([...list, ...preSelection]);
-      setKeyword("");
-      setCategories([]);
-      setPreSelection([]);
-    }
+
+    preSelection.find(option => {
+      if (list.find(category => category.name === option.name)) {
+        setAlertError(
+          `Category name '${
+            option.name
+          }' already added. Please Change your selection.`
+        );
+        return -1;
+      } else return true;
+    });
+
+    setList([...list, ...preSelection]);
+    setKeyword("");
+    setCategories([]);
+    setPreSelection([]);
   };
 
   return (

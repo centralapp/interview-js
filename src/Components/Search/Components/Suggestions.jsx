@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col } from "reactstrap";
+import { Row } from "reactstrap";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Switch from "@material-ui/core/Switch";
 import Paper from "@material-ui/core/Paper";
 import Collapse from "@material-ui/core/Collapse";
 import isEmpty from "common/is-empty";
@@ -41,19 +40,17 @@ export default function Suggestions({ ...props }) {
     <Grid item xs={12}>
       <Collapse in={checked} className={classes.collapse}>
         <Paper elevation={4} className={classes.paper}>
-          {!isEmpty(options)
-            ? options.map((option, index) => {
-                return (
-                  <Row
-                    key={index}
-                    className={style.suggestion}
-                    onClick={() => handleSelection(option)}
-                  >
-                    {option}
-                  </Row>
-                );
-              })
-            : ""}
+          {options.map((option, index) => {
+            return (
+              <Row
+                key={index}
+                className={style.suggestion}
+                onClick={() => handleSelection(option)}
+              >
+                {option.name}
+              </Row>
+            );
+          })}
         </Paper>
       </Collapse>
     </Grid>
