@@ -1,0 +1,51 @@
+form{
+    margin: 30px;
+}
+
+input{
+    border-radius: 4px;
+    margin: 20px auto;
+    display: block;
+}
+
+label{
+    display: block;
+    font-weight: lighter;
+}
+
+.categories{
+    width: 130px;
+}
+
+.categories-item{
+    width: 130px;
+    overflow: hidden;
+}
+
+table{
+    margin: 0 auto;
+    width: 80%;
+}
+
+th{
+    font-weight: lighter;
+    padding: 10px;
+}
+
+td{
+    font-weight: lighter;
+    padding: 10px;
+}
+
+.valid::after{
+    content: '✓';
+    padding-left: 5px;
+}
+
+.invalid::after{
+    content: 'The category is already selected or doesn\'t exist';
+    font-size: 10px;
+    color: red;
+    padding-left: 5px;
+}
+
